@@ -61,6 +61,7 @@ const RepositoryList = () => {
   const renderItemFunc = ({ item }) => {
     return (
       <RepositoryItem 
+        itemImage={ item.ownerAvatarUrl }
         itemTitle={ item.fullName } 
         itemDescription={ item.description }
         itemLanguage={ item.language }
