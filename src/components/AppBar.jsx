@@ -1,5 +1,7 @@
 import React from 'react';
-import { TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import { TouchableWithoutFeedback, View, StyleSheet, 
+         TouchableOpacity, ScrollView } from 'react-native';
+import { Link } from 'react-router-native';
 import Constants from 'expo-constants';
 import appTheme from '../css/theme';
 import { Heading } from './Text';
@@ -14,13 +16,20 @@ const appBarStyle = StyleSheet.create({
     alignItems: 'center',
     padding: 5,
     paddingTop: Constants.statusBarHeight
+  },
+  appBarTab: {
+    marginRight: 20
   }
 });
 
-const AppBarTab = ({ title }) => {
+const AppBarTab = ({ title, target }) => {
   return (
     <TouchableWithoutFeedback>
-      <Heading contrast={ true }>{ title }</Heading>
+      <Link to={ target } component={ TouchableOpacity }>
+        <Heading contrast={ true } style={ appBarStyle.appBarTab }>
+          { title }
+        </Heading>
+      </Link>
     </TouchableWithoutFeedback>
   );
 };
@@ -28,7 +37,10 @@ const AppBarTab = ({ title }) => {
 const AppBar = () => {
   return (
     <View style={ appBarStyle.appBar }>
-      <AppBarTab title='Repositories' /> 
+      <ScrollView showsHorizontalScrollIndicator={ false } horizontal>
+        <AppBarTab title='Repositories' target="/" /> 
+        <AppBarTab title='Sign In' target="/signin" />
+      </ScrollView>
     </View>
   );
 };

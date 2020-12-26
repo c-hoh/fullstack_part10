@@ -5,11 +5,11 @@ const appTheme = {
     contrast: '#f0f0f0'
   },
   textProperties: {
-    defaultSize: 14,
-    smallSize: 12,
-    largeSize: 18,
-    headingSize: 20,
-    fontFamily: 'sans-serif',
+    defaultSize: 16,
+    smallSize: 14,
+    largeSize: 20,
+    headingSize: 22,
+    fontFamily: 'normal',
     fontWeight: '400',
     boldWeight: '700'
   },
@@ -24,6 +24,9 @@ const appTheme = {
   smallImage: {
     height: 40,
     width: 40
+  },
+  input: {
+    inputHeight: 40
   }
 };
 
