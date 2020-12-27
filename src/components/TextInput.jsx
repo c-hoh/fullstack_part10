@@ -9,12 +9,20 @@ const styles = StyleSheet.create({
     borderColor: appTheme.colours.secondaryLight,
     marginTop: 10,
     padding: 10,
-    fontSize: appTheme.textProperties.defaultSize 
+    fontSize: appTheme.textProperties.defaultSize,
+    borderRadius: 5
+  },
+  errorBorder: {
+    borderColor: appTheme.colours.error,
+    borderWidth: 2
   }
 });
 
-const TextInput = ({ style, ...props }) => {
-  const textInputStyle = [ style, styles.textInput ];
+const TextInput = ({ style, error, ...props }) => {
+  const textInputStyle = [ styles.textInput, style ];
+  if (error) {
+    textInputStyle.push(styles.errorBorder);
+  }
   return <NativeTextInput style={ textInputStyle } { ...props } />;
 };
 

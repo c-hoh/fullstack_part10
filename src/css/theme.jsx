@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 const appTheme = {
   textColours: {
     main: '#202020',
@@ -9,7 +11,11 @@ const appTheme = {
     smallSize: 14,
     largeSize: 20,
     headingSize: 22,
-    fontFamily: 'normal',
+    fontFamily: Platform.select({
+      android: 'Roboto',
+      ios: 'Arial',
+      default: 'system'
+    }),
     fontWeight: '400',
     boldWeight: '700'
   },
@@ -19,7 +25,8 @@ const appTheme = {
     secondary: '#202020',
     secondaryLight: '#9d9d9d',
     veryLight: '#e1e4e8',
-    white: '#ffffff'
+    white: '#ffffff',
+    error: '#831b0e'
   },
   smallImage: {
     height: 40,

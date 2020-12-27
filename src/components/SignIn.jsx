@@ -2,6 +2,8 @@ import React from 'react';
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import FormikTextInput from './FormikTextInput';
+import * as yup from 'yup';
+
 import Text from './Text';
 import appTheme from '../css/theme';
 
@@ -27,8 +29,14 @@ const signInView = StyleSheet.create({
     height: appTheme.input.inputHeight,
     flexGrow: 1,
     textAlign: 'center',
-    padding: 6
+    padding: 6,
+    borderRadius: 5
   }
+});
+
+const signInValidationSchema = yup.object().shape({
+  username: yup.string().trim().required('Username is required.'),
+  password: yup.string().trim().required('Password is required.')
 });
 
 const SignIn = () => {
@@ -46,11 +54,13 @@ const SignIn = () => {
       <Formik
         initialValues={ initialFormValues }
         onSubmit={ values => submitValues(values) }
+        validationSchema={ signInValidationSchema }
       >
         { ({ handleSubmit }) => (
           <View>
             <FormikTextInput name="username" placeholder="username" />
-            <FormikTextInput name="password" placeholder="password" />
+            <FormikTextInput name="password" placeholder="password" 
+              secureTextEntry />
             <View style={ signInView.loginButtonArea }>
               <TouchableWithoutFeedback onPress={ handleSubmit }>
                 <Text style={ signInView.loginButtonStyle }>Sign In</Text>
