@@ -24,7 +24,9 @@ export default {
     favicon: './assets/favicon.png'
   },
   extra: {
+    // eslint-disable-next-line no-undef
     env: process.env.ENV,
+    // eslint-disable-next-line no-undef
     apolloUri: process.env.APOLLOURI
   }
 };
