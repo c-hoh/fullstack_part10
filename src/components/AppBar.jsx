@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TouchableWithoutFeedback, View, StyleSheet, 
          TouchableOpacity, ScrollView } from 'react-native';
-import { Link } from 'react-router-native';
+import { Link, useHistory } from 'react-router-native';
 import Constants from 'expo-constants';
+import { useApolloClient } from '@apollo/client';
 import appTheme from '../css/theme';
 import { Heading } from './Text';
+import AuthStorageContext from '../contexts/AuthStorageContext';
+
 
 const appBarStyle = StyleSheet.create({
   appBar: {
@@ -34,12 +37,35 @@ const AppBarTab = ({ title, target }) => {
   );
 };
 
-const AppBar = () => {
+const AppBarTabFunc = ({ title, func }) => {
+  return (
+    <TouchableWithoutFeedback onPress={ func }>
+      <Heading contrast={ true } style={ appBarStyle.appBarTab }>
+        { title }
+      </Heading>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const AppBar = ({ user }) => {
+  const authStorage = useContext(AuthStorageContext);
+  const apolloClient = useApolloClient();
+  const history = useHistory();
+
+  const signOut = async () => {
+    await authStorage.removeAccessToken();
+    apolloClient.resetStore();
+    history.push('/signin');
+  };
+
   return (
     <View style={ appBarStyle.appBar }>
       <ScrollView showsHorizontalScrollIndicator={ false } horizontal>
         <AppBarTab title='Repositories' target="/" /> 
-        <AppBarTab title='Sign In' target="/signin" />
+        { user
+          ? <AppBarTabFunc title="Sign Out" func={ signOut } />
+          : <AppBarTab title='Sign In' target="/signin" />
+        }
       </ScrollView>
     </View>
   );

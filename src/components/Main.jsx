@@ -6,6 +6,8 @@ import appTheme from '../css/theme';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
+import useAuthUser from '../hooks/useAuthUser';
+
 
 const mainStyle = StyleSheet.create({
   appContainer: {
@@ -20,9 +22,11 @@ const mainStyle = StyleSheet.create({
 });
 
 const Main = () => {
+  const { user } = useAuthUser();
+
   return(
     <View style={ mainStyle.appContainer }>
-      <AppBar />
+      <AppBar user={ user } />
       <Switch>
         <Route path="/" exact>
           <RepositoryList style={ mainStyle.mainContainer }/>

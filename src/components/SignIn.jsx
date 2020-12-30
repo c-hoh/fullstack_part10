@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { useHistory } from 'react-router-native';
 import { Formik } from 'formik';
 import FormikTextInput from './FormikTextInput';
 import * as yup from 'yup';
@@ -42,6 +43,7 @@ const signInValidationSchema = yup.object().shape({
 
 const SignIn = () => {
   const [doSignIn] = useSignIn();
+  const history = useHistory();
 
   const initialFormValues = {
     username: '',
@@ -50,10 +52,10 @@ const SignIn = () => {
 
   const submitValues = async (values, { resetForm }) => {
     try {
-      const { data } = await doSignIn({ 
+      const data = await doSignIn({ 
         username: values.username, password: values.password });
-      console.log(data.authorize.accessToken);
       resetForm({});
+      history.push('/');
     } catch (e) {
       console.log(e);
     }
