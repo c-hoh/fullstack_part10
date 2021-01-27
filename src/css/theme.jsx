@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const appTheme = {
   textColours: {
@@ -34,7 +34,40 @@ const appTheme = {
   },
   input: {
     inputHeight: 40
+  },
+  circle: {
+    height: 60,
+    width: 60
   }
 };
+
+export const style = StyleSheet.create({
+  view: {
+    padding: 5,
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: appTheme.colours.white,
+    flex: 1
+  },
+  buttonArea: {
+    marginTop: 10,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonStyle: {
+    backgroundColor: appTheme.colours.primary,
+    fontSize: appTheme.textProperties.defaultSize,
+    color: appTheme.textColours.contrast,
+    fontWeight: appTheme.textProperties.boldWeight,
+    height: appTheme.input.inputHeight,
+    flexGrow: 1,
+    textAlign: 'center',
+    padding: 6,
+    borderRadius: 5
+  }
+});
+
 
 export default appTheme;

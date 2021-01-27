@@ -7,6 +7,10 @@ import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import useAuthUser from '../hooks/useAuthUser';
+import RepositoryItem from './RepositoryItem';
+import CreateReview from './CreateReview';
+import SignUp from './SignUp';
+import MyReviews from './MyReviews';
 
 
 const mainStyle = StyleSheet.create({
@@ -29,10 +33,24 @@ const Main = () => {
       <AppBar user={ user } />
       <Switch>
         <Route path="/" exact>
-          <RepositoryList style={ mainStyle.mainContainer }/>
+          <RepositoryList 
+            style={ mainStyle.mainContainer } 
+          />
+        </Route>
+        <Route path="/review" exact>
+          <CreateReview />
+        </Route>
+        <Route path="/myreviews" exact>
+          <MyReviews />
         </Route>
         <Route path="/signin" exact>
           <SignIn />
+        </Route>
+        <Route path="/signup" exact>
+          <SignUp />
+        </Route>
+        <Route path="/repo/:repo+">
+          <RepositoryItem showOpen={ true } />
         </Route>
         <Redirect to="/" />
       </Switch>

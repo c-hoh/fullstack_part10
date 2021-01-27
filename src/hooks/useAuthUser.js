@@ -1,21 +1,20 @@
 import { useQuery } from '@apollo/react-hooks';
-import { useEffect, useState } from 'react';
 import { IS_AUTH } from '../graphql/queries';
 
-const useAuthUser = () => {
-  const [user, setUser] = useState({});
+const useAuthUser = (fetchReviews) => {
+  const useReviews = fetchReviews ? true : false;
 
   const result = useQuery(IS_AUTH, {
     fetchPolicy: 'cache-and-network',
+    variables: {
+      useReviews
+    }
   });
 
-  useEffect(() => {
-    if (!result.loading) {
-      setUser(result.data.authorizedUser);
-    }
-  }, [result.loading]);
-
-  return { user };
+  return { 
+    user: result.data ? result.data.authorizedUser : undefined,
+    refetch: result.refetch 
+  };
 };
 
 export default useAuthUser;

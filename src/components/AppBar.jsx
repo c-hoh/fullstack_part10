@@ -55,16 +55,23 @@ const AppBar = ({ user }) => {
   const signOut = async () => {
     await authStorage.removeAccessToken();
     apolloClient.resetStore();
-    history.push('/signin');
+    history.push('/');
   };
 
   return (
     <View style={ appBarStyle.appBar }>
       <ScrollView showsHorizontalScrollIndicator={ false } horizontal>
-        <AppBarTab title='Repositories' target="/" /> 
+        <AppBarTab title="Repositories" target="/" /> 
         { user
-          ? <AppBarTabFunc title="Sign Out" func={ signOut } />
-          : <AppBarTab title='Sign In' target="/signin" />
+          ? <>
+              <AppBarTab title="Create a Review" target="/review" />
+              <AppBarTab title="My Reviews" target="/myreviews" />
+              <AppBarTabFunc title="Sign Out" func={ signOut } />
+            </>
+          : <>
+              <AppBarTab title="Sign In" target="/signin" />
+              <AppBarTab title="Sign Up" target="/signup" />
+            </>
         }
       </ScrollView>
     </View>
